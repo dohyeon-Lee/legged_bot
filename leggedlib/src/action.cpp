@@ -97,7 +97,7 @@ vector<double> action::forward_walking(int *state, double *x, double *y, double 
 
 vector<vector<double>> action::forward(double *t1, double *t2,double *t3,double *t4)
 {
-    vector<vector<double>> point = {forward_walking(&state1,&x1,&y1,&z1,t1,1),  forward_walking(&state2,&x2,&y2,&z2,t2,2),
-                                    forward_walking(&state3,&x3,&y3,&z3,t3,3),  forward_walking(&state4,&x4,&y4,&z4,t4,4)};
+    vector<vector<double>> point = {forward_walking(&state1,&x1,&y1,&z1,t1,1),forward_walking(&state2,&x2,&y2,&z2,t2,2),
+                                    forward_walking(&state3,&x3,&y3,&z3,t3,3),forward_walking(&state4,&x4,&y4,&z4,t4,4)};
     return point;
 }
