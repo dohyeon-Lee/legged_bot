@@ -1,0 +1,5 @@
+cmake_minimum_required (VERSION 2.8)
+project (legged_bot)
+add_subdirectory(leggedlib)
+add_executable (legged_bot main.cpp)
+target_link_libraries(legged_bot PUBLIC leggedlib)

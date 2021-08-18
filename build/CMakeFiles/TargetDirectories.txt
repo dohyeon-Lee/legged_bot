@@ -1,0 +1,6 @@
+/home/ubuntu/legged_bot/build/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/legged_bot/build/CMakeFiles/legged_bot.dir
+/home/ubuntu/legged_bot/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/legged_bot/build/leggedlib/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/legged_bot/build/leggedlib/CMakeFiles/leggedlib.dir
+/home/ubuntu/legged_bot/build/leggedlib/CMakeFiles/edit_cache.dir

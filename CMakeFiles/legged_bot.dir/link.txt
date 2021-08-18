@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/legged_bot.dir/main.cpp.o  -o legged_bot leggedlib/libleggedlib.a 
