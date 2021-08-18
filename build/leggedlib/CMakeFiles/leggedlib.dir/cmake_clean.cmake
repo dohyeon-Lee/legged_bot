@@ -12,6 +12,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/leggedlib.dir/src/motor_control.cpp.o"
   "CMakeFiles/leggedlib.dir/src/group_motor_control.cpp.o"
   "CMakeFiles/leggedlib.dir/src/action.cpp.o"
+  "CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o"
   "libleggedlib.pdb"
   "libleggedlib.a"
 )

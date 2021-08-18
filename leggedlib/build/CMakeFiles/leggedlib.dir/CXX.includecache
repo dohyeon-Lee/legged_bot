@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+../include/action.h
+iostream
+-
+cmath
+-
+vector
+-
+
 ../include/dynamixel_sdk.h
 group_bulk_read.h
 ../include/group_bulk_read.h
@@ -130,7 +138,11 @@ packet_handler.h
 packet_handler.h
 ../include/packet_handler.h
 
+/home/ubuntu/legged_bot/leggedlib/src/SerialPort.cpp
+
 /home/ubuntu/legged_bot/leggedlib/src/action.cpp
+action.h
+/home/ubuntu/legged_bot/leggedlib/src/action.h
 
 /home/ubuntu/legged_bot/leggedlib/src/group_bulk_read.cpp
 stdio.h

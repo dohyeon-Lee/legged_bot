@@ -123,6 +123,33 @@ leggedlib/fast:
 	$(MAKE) -f CMakeFiles/leggedlib.dir/build.make CMakeFiles/leggedlib.dir/build
 .PHONY : leggedlib/fast
 
+src/SerialPort.o: src/SerialPort.cpp.o
+
+.PHONY : src/SerialPort.o
+
+# target to build an object file
+src/SerialPort.cpp.o:
+	$(MAKE) -f CMakeFiles/leggedlib.dir/build.make CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o
+.PHONY : src/SerialPort.cpp.o
+
+src/SerialPort.i: src/SerialPort.cpp.i
+
+.PHONY : src/SerialPort.i
+
+# target to preprocess a source file
+src/SerialPort.cpp.i:
+	$(MAKE) -f CMakeFiles/leggedlib.dir/build.make CMakeFiles/leggedlib.dir/src/SerialPort.cpp.i
+.PHONY : src/SerialPort.cpp.i
+
+src/SerialPort.s: src/SerialPort.cpp.s
+
+.PHONY : src/SerialPort.s
+
+# target to generate assembly for a file
+src/SerialPort.cpp.s:
+	$(MAKE) -f CMakeFiles/leggedlib.dir/build.make CMakeFiles/leggedlib.dir/src/SerialPort.cpp.s
+.PHONY : src/SerialPort.cpp.s
+
 src/action.o: src/action.cpp.o
 
 .PHONY : src/action.o
@@ -483,6 +510,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... leggedlib"
 	@echo "... edit_cache"
+	@echo "... src/SerialPort.o"
+	@echo "... src/SerialPort.i"
+	@echo "... src/SerialPort.s"
 	@echo "... src/action.o"
 	@echo "... src/action.i"
 	@echo "... src/action.s"

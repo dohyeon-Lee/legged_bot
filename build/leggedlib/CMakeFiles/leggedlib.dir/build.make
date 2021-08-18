@@ -369,6 +369,30 @@ leggedlib/CMakeFiles/leggedlib.dir/src/action.cpp.o.provides: leggedlib/CMakeFil
 leggedlib/CMakeFiles/leggedlib.dir/src/action.cpp.o.provides.build: leggedlib/CMakeFiles/leggedlib.dir/src/action.cpp.o
 
 
+leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o: leggedlib/CMakeFiles/leggedlib.dir/flags.make
+leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o: ../leggedlib/src/SerialPort.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ubuntu/legged_bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o"
+	cd /home/ubuntu/legged_bot/build/leggedlib && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o -c /home/ubuntu/legged_bot/leggedlib/src/SerialPort.cpp
+
+leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/leggedlib.dir/src/SerialPort.cpp.i"
+	cd /home/ubuntu/legged_bot/build/leggedlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/legged_bot/leggedlib/src/SerialPort.cpp > CMakeFiles/leggedlib.dir/src/SerialPort.cpp.i
+
+leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/leggedlib.dir/src/SerialPort.cpp.s"
+	cd /home/ubuntu/legged_bot/build/leggedlib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/legged_bot/leggedlib/src/SerialPort.cpp -o CMakeFiles/leggedlib.dir/src/SerialPort.cpp.s
+
+leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o.requires:
+
+.PHONY : leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o.requires
+
+leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o.provides: leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o.requires
+	$(MAKE) -f leggedlib/CMakeFiles/leggedlib.dir/build.make leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o.provides.build
+.PHONY : leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o.provides
+
+leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o.provides.build: leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o
+
+
 # Object files for target leggedlib
 leggedlib_OBJECTS = \
 "CMakeFiles/leggedlib.dir/src/group_bulk_read.cpp.o" \
@@ -383,7 +407,8 @@ leggedlib_OBJECTS = \
 "CMakeFiles/leggedlib.dir/src/inverse_kinemetics.cpp.o" \
 "CMakeFiles/leggedlib.dir/src/motor_control.cpp.o" \
 "CMakeFiles/leggedlib.dir/src/group_motor_control.cpp.o" \
-"CMakeFiles/leggedlib.dir/src/action.cpp.o"
+"CMakeFiles/leggedlib.dir/src/action.cpp.o" \
+"CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o"
 
 # External object files for target leggedlib
 leggedlib_EXTERNAL_OBJECTS =
@@ -401,9 +426,10 @@ leggedlib/libleggedlib.a: leggedlib/CMakeFiles/leggedlib.dir/src/inverse_kinemet
 leggedlib/libleggedlib.a: leggedlib/CMakeFiles/leggedlib.dir/src/motor_control.cpp.o
 leggedlib/libleggedlib.a: leggedlib/CMakeFiles/leggedlib.dir/src/group_motor_control.cpp.o
 leggedlib/libleggedlib.a: leggedlib/CMakeFiles/leggedlib.dir/src/action.cpp.o
+leggedlib/libleggedlib.a: leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o
 leggedlib/libleggedlib.a: leggedlib/CMakeFiles/leggedlib.dir/build.make
 leggedlib/libleggedlib.a: leggedlib/CMakeFiles/leggedlib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ubuntu/legged_bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX static library libleggedlib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ubuntu/legged_bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX static library libleggedlib.a"
 	cd /home/ubuntu/legged_bot/build/leggedlib && $(CMAKE_COMMAND) -P CMakeFiles/leggedlib.dir/cmake_clean_target.cmake
 	cd /home/ubuntu/legged_bot/build/leggedlib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/leggedlib.dir/link.txt --verbose=$(VERBOSE)
 
@@ -425,6 +451,7 @@ leggedlib/CMakeFiles/leggedlib.dir/requires: leggedlib/CMakeFiles/leggedlib.dir/
 leggedlib/CMakeFiles/leggedlib.dir/requires: leggedlib/CMakeFiles/leggedlib.dir/src/motor_control.cpp.o.requires
 leggedlib/CMakeFiles/leggedlib.dir/requires: leggedlib/CMakeFiles/leggedlib.dir/src/group_motor_control.cpp.o.requires
 leggedlib/CMakeFiles/leggedlib.dir/requires: leggedlib/CMakeFiles/leggedlib.dir/src/action.cpp.o.requires
+leggedlib/CMakeFiles/leggedlib.dir/requires: leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o.requires
 
 .PHONY : leggedlib/CMakeFiles/leggedlib.dir/requires
 

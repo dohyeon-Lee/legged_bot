@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/ubuntu/legged_bot/leggedlib/src/SerialPort.cpp" "/home/ubuntu/legged_bot/build/leggedlib/CMakeFiles/leggedlib.dir/src/SerialPort.cpp.o"
   "/home/ubuntu/legged_bot/leggedlib/src/action.cpp" "/home/ubuntu/legged_bot/build/leggedlib/CMakeFiles/leggedlib.dir/src/action.cpp.o"
   "/home/ubuntu/legged_bot/leggedlib/src/group_bulk_read.cpp" "/home/ubuntu/legged_bot/build/leggedlib/CMakeFiles/leggedlib.dir/src/group_bulk_read.cpp.o"
   "/home/ubuntu/legged_bot/leggedlib/src/group_bulk_write.cpp" "/home/ubuntu/legged_bot/build/leggedlib/CMakeFiles/leggedlib.dir/src/group_bulk_write.cpp.o"

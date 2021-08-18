@@ -138,6 +138,8 @@ packet_handler.h
 packet_handler.h
 ../leggedlib/include/packet_handler.h
 
+/home/ubuntu/legged_bot/leggedlib/src/SerialPort.cpp
+
 /home/ubuntu/legged_bot/leggedlib/src/action.cpp
 action.h
 /home/ubuntu/legged_bot/leggedlib/src/action.h
