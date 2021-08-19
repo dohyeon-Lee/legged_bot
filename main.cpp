@@ -92,9 +92,9 @@ int main(int argc, char *argv[])
   while(1)
   {
     //about serial
-    serial.readangles(serial_port, &anglex, &angley);
-    if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
-      printf("%lf %lf\n", anglex, angley);
+    //serial.readangles(serial_port, &anglex, &angley);
+    //if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
+    // printf("%lf %lf\n", anglex, angley);
 
     //about walking
     /*t1 = t1 + 0.00003;
@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
     t4 = t4 + 0.00003;
     point = act.forward(&t1, &t2, &t3, &t4);
     legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);*/
-    vector<double> angle = body.aaa(30.0,0);
+    vector<double> angle = body.aaa(10,10);
     point = body.groundslope(angle,l);
     legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
     usleep(sleep_time);
