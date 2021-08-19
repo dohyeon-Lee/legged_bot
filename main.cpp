@@ -12,8 +12,6 @@
 #include "action.h"
 #include <unistd.h>
 
-
-
 #include <string>
 #include <stdexcept>
 // C library headers
@@ -30,43 +28,14 @@
 #include <csignal>
 #include <sys/file.h>
 #include "SerialClass.h"
-int serial_port;
-
-void signalHandler( int signum ) {
-   // cleanup and close up stuff here  
-   // terminate program
-    close(serial_port);
-    exit(signum);  
-}
-
-int main(int argc, char *argv[])
-{
-    signal(SIGINT, signalHandler);  
-    Serial serial(&serial_port, "/dev/ttyACM0",9600);
-    
-    while (true) 
-    {
-        char chr;
-        int num_bytes;
-        do {
-            num_bytes = read(serial_port, &chr, 1);
-            if (num_bytes < 0) {
-                printf("Error reading: %s", strerror(errno));
-                break;
-            }
-            if (num_bytes == 1) {
-                printf("%c", chr);
-
-            }
-        }
-        while (num_bytes);
-        nanosleep((const struct timespec[]){{0, 10000000L}}, NULL);
-    }
-
-    return 0;
-}
-/*
 using std::vector;
+
+int serial_port;
+void signalHandler( int signum ) 
+{
+  close(serial_port);
+  exit(signum);  
+}
 
 int getch()
 {
@@ -81,8 +50,13 @@ int getch()
   return ch;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+  //serial setting
+  signal(SIGINT, signalHandler);  
+  Serial serial(&serial_port, "/dev/ttyACM0",9600);
+
+  //dynamixel setting
   dynamixel::PortHandler *portHandler = dynamixel::PortHandler::getPortHandler(DEVICENAME);
   dynamixel::PacketHandler *packetHandler = dynamixel::PacketHandler::getPacketHandler(PROTOCOL_VERSION);
   dynamixel::GroupSyncWrite groupSyncWrite(portHandler, packetHandler, ADDR_MX_GOAL_POSITION, LEN_MX_GOAL_POSITION);
@@ -111,6 +85,13 @@ int main()
   }
   while(1)
   {
+    //about serial
+    char chr;
+    int num_bytes;
+    num_bytes = read(serial_port, &chr, 1);
+    printf("%c", chr);
+
+    //about dynamixel
     t1 = t1 + 0.00003;
     t2 = t2 + 0.00003;
     t3 = t3 + 0.00003;
@@ -121,134 +102,24 @@ int main()
   }
   
   
+  /*while (true) 
+  {
+    char chr;
+    int num_bytes;
+    do {
+        num_bytes = read(serial_port, &chr, 1);
+        if (num_bytes < 0) {
+            printf("Error reading: %s", strerror(errno));
+            break;
+        }
+        if (num_bytes == 1) {
+            printf("%c", chr);
 
+        }
+    }
+    while (num_bytes);
+    nanosleep((const struct timespec[]){{0, 10000000L}}, NULL);
+  }
+*/
   return 0;
 }
-*/
-/*
-printf("Press any key to continue! (or press ESC to quit!)\n");
-    if (getch() == ESC_ASCII_VALUE)
-      break;
-
-  int count = 0;
-    if(std::abs(l) > 0.1)
-    {
-      count = 1;
-      l = l + 0.0001;
-    }
-    else if(std::abs(l) < 0.15)
-    {
-      count = 0;
-      l = l - 0.0001;
-    }
-    else if(std::abs(l) >= 0.15 && count == 0)
-    {
-      count = 0;
-      l = l - 0.0001;
-    }
-    else if(std::abs(l) >= 0.15 && count == 1)
-    {
-      count = 1;
-      l = l + 0.0001;
-    }
-
-
-    if (data == 0)
-    {
-      l = 0.15;
-      data = 1;
-    }
-    else if (data == 1)
-    {
-      l = 0.1;
-      data = 0;
-    }
-*/
-
-//shack butt
-/*
-while(1)
-  {
-    if (getch() == ESC_ASCII_VALUE)
-    {
-      legged_bot.rest(portHandler, packetHandler, groupSyncWrite);
-      break;
-
-    }
-      
-    for(double i = 0; i <= 0.1; i = i+0.0001)
-    {
-      normal[0] = 0.1;
-      normal[1] = i;
-
-      point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-      usleep(sleep_time);
-    }
-    for(double i = 0; i <= 0.1; i = i+0.0001)
-    {
-      normal[0] = 0.1-i;
-      normal[1] = 0.1;
-
-      point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-      usleep(sleep_time);
-    }
-    for(double i = 0; i <= 0.1; i = i+0.0001)
-    {
-      normal[0] = -i;
-      normal[1] = 0.1;
-
-      point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-      usleep(sleep_time);
-    }
-    for(double i = 0; i <= 0.1; i = i+0.0001)
-    {
-      normal[0] = -0.1;
-      normal[1] = 0.1-i;
-
-      point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-      usleep(sleep_time);
-    }
-    for(double i = 0; i <= 0.1; i = i+0.0001)
-    {
-      normal[0] = -0.1;
-      normal[1] = -i;
-
-      point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-      usleep(sleep_time);
-    }
-    for(double i = 0; i <= 0.1; i = i+0.0001)
-    {
-      normal[0] = -0.1+i;
-      normal[1] = -0.1;
-
-      point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-      usleep(sleep_time);
-    }
-    for(double i = 0; i <= 0.1; i = i+0.0001)
-    {
-      normal[0] = i;
-      normal[1] = -0.1;
-
-      point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-      usleep(sleep_time);
-    }
-    for(double i = 0; i <= 0.1; i = i+0.0001)
-    {
-      normal[0] = 0.1;
-      normal[1] = -0.1+i;
-
-      point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-      usleep(sleep_time);
-    }
-
-  }
-  
-  */

@@ -3,5 +3,5 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("Hello from Arduino!");
+  Serial.println("1");
 }
