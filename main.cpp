@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
   {
     //about serial
     serial.readangles(serial_port, &anglex, &angley);
-    if(anglex != -1 && angley != -1 && anglex != INFINITY && angley != INFINITY)
+    if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
       printf("%lf %lf\n", anglex, angley);
 
     //about dynamixel

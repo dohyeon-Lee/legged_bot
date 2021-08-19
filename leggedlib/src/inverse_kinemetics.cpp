@@ -224,3 +224,40 @@ vector<vector<double>> IK::plane(vector<double> normal, double l)
     vector<vector<double>> points = {RF1, LF1, LB1, RB1};
     return points;
 }
+
+vector<vector<double>> IK::groundslope(vector<double> normal, double l)
+{
+    //about body length
+    double LFx = 0.095; //190/2 * 0.001
+    double LFy = 0.059;//118/2 * 0.001
+    double RFx = 0.095; //190/2 * 0.001
+    double RFy = -0.059;//-118/2 * 0.001
+    double LBx = -0.095;//-190/2 * 0.001
+    double LBy = 0.059;//118/2 * 0.001
+    double RBx = -0.095;//-190/2 * 0.001
+    double RBy = -0.059;//-118/2 * 0.001
+    
+    vector<double> LF0 = {LFx, LFy, 0};
+    vector<double> RF0 = {RFx, RFy, 0};
+    vector<double> LB0 = {LBx, LBy, 0};
+    vector<double> RB0 = {RBx, RBy, 0};
+
+    vector<double> n = multiply(normal,(double)(1/(sqrt(dot(normal,normal)))));
+    vector<double> z = {0,0,1};
+    vector<double> p = multiply(z,-l);
+
+    double LFt = dot(sub(p,LF0),n)/dot(z,n);
+    vector<double> LF1 = add(LF0, multiply(z,LFt));
+
+    double RFt = dot(sub(p,RF0),n)/dot(z,n);
+    vector<double> RF1 = add(RF0, multiply(z,RFt));
+
+    double LBt = dot(sub(p,LB0),n)/dot(z,n);
+    vector<double> LB1 = add(LB0, multiply(z,LBt));
+
+    double RBt = dot(sub(p,RB0),n)/dot(z,n);
+    vector<double> RB1 = add(RB0, multiply(z,RBt));
+
+    vector<vector<double>> points = {RF1, LF1, LB1, RB1};
+    return points;
+}

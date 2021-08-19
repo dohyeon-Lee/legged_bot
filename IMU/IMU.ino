@@ -69,7 +69,5 @@ void loop() {
   */
   Serial.print(angle_x);
   Serial.print(",");
-  Serial.print(angle_y);
-  Serial.print(".");
-  Serial.println(bump);
+  Serial.println(angle_y);
 }
