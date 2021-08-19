@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
   portHandler->setBaudRate(BAUDRATE);
 
   group_motor_control legged_bot;
-  vector<double> normal = {0,0.2,1}; //for plane & groundslope
+  vector<double> normal = {0,0.3,1}; //for plane & groundslope
   IK body; 
   action act;
 
@@ -103,8 +103,8 @@ int main(int argc, char *argv[])
     t4 = t4 + 0.00003;
     point = act.forward(&t1, &t2, &t3, &t4);
     legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);*/
-
-    point = body.groundslope(normal,l);
+    vector<double> angle = body.aaa(30.0,0);
+    point = body.groundslope(angle,l);
     legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
     usleep(sleep_time);
   }

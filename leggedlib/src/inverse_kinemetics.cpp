@@ -261,3 +261,12 @@ vector<vector<double>> IK::groundslope(vector<double> normal, double l)
     vector<vector<double>> points = {RF1, LF1, LB1, RB1};
     return points;
 }
+
+vector<double> IK::aaa(double pitch, double roll)
+{
+    double x = cos(pitch*(M_PI/180.0))*sin(roll*(M_PI/180.0));
+    double y = sin(pitch*(M_PI/180.0));
+    double z = cos(pitch*(M_PI/180.0))*cos(roll*(M_PI/180.0));
+    vector<double> point = {x, y, z};
+    return point;
+}
