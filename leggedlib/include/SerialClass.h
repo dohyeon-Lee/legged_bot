@@ -21,6 +21,6 @@ class Serial
     public:
         Serial(int *serial_port ,char port[], int baudrate);
         void writeserial(char arr[]);
-        void readserial();
+        int readserial(int serial_port);
         int connect();
 };

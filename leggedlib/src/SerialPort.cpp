@@ -1,4 +1,5 @@
 #include "SerialClass.h"
+using namespace std;
 
 Serial::Serial(int *serial_port, char port[], int baudrate)
 {
@@ -48,7 +49,25 @@ Serial::Serial(int *serial_port, char port[], int baudrate)
     }
 }
 
-
+int Serial::readserial(int serial_port)
+{
+    string str;
+    char chr;
+    int num_bytes;
+    int message;
+    int state = 0;
+    while(1)
+    {
+      num_bytes = read(serial_port, &chr, 1);
+      if(chr == '\n')
+        break;
+      else
+        str.push_back(chr);
+    }
+    if(sscanf(str.c_str(), "%d", &message) != 1);
+    str = "";
+    return message;
+}
 
 /*
 #include <string>

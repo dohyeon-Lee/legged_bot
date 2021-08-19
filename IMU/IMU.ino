@@ -1,7 +1,8 @@
 void setup() {
   Serial.begin(9600);
 }
-
-void loop() {
-  Serial.println("1");
+int i = 0;
+void loop() 
+{
+  Serial.println("1234");
 }

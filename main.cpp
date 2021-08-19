@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-
+#include <cstdio>
 // Linux headers
 #include <fcntl.h> // Contains file controls like O_RDWR
 #include <errno.h> // Error integer and strerror() function
@@ -29,7 +29,8 @@
 #include <sys/file.h>
 #include "SerialClass.h"
 using std::vector;
-
+using std::string;
+using namespace std;
 int serial_port;
 void signalHandler( int signum ) 
 {
@@ -72,7 +73,7 @@ int main(int argc, char *argv[])
   double l = 0.15;
   vector<vector<double>> point;
   legged_bot.setting(portHandler, packetHandler, groupSyncWrite);
-  int sleep_time = 10000;
+  int sleep_time = 5000;
   double t1 = 0;
   double t2 = 0;
   double t3 = 0;
@@ -81,15 +82,15 @@ int main(int argc, char *argv[])
   if (getch() == ESC_ASCII_VALUE)
   {
     legged_bot.rest(portHandler, packetHandler, groupSyncWrite);
-    return 0;
+    return 0; 
   }
+  int message;
   while(1)
   {
     //about serial
-    char chr;
-    int num_bytes;
-    num_bytes = read(serial_port, &chr, 1);
-    printf("%c", chr);
+    message = serial.readserial(serial_port);
+    if(message != -1)
+      printf("%d\n", message);
 
     //about dynamixel
     t1 = t1 + 0.00003;
