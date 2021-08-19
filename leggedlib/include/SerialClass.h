@@ -19,7 +19,8 @@ class Serial
     private:
         
     public:
-        int serial_port;
-        void signalHandler( int signum );
+        Serial(int *serial_port ,char port[], int baudrate);
+        void writeserial(char arr[]);
+        void readserial();
         int connect();
 };

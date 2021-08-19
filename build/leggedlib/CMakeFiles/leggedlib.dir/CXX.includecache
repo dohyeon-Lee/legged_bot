@@ -6,6 +6,32 @@
 
 #IncludeRegexTransform: 
 
+../leggedlib/include/SerialClass.h
+string
+-
+stdexcept
+-
+stdio.h
+-
+string.h
+-
+time.h
+-
+fcntl.h
+-
+errno.h
+-
+termios.h
+-
+unistd.h
+-
+cstdlib
+-
+csignal
+-
+sys/file.h
+-
+
 ../leggedlib/include/action.h
 iostream
 -
@@ -139,6 +165,32 @@ packet_handler.h
 ../leggedlib/include/packet_handler.h
 
 /home/ubuntu/legged_bot/leggedlib/src/SerialPort.cpp
+SerialClass.h
+/home/ubuntu/legged_bot/leggedlib/src/SerialClass.h
+string
+-
+stdexcept
+-
+stdio.h
+-
+string.h
+-
+time.h
+-
+fcntl.h
+-
+errno.h
+-
+termios.h
+-
+unistd.h
+-
+cstdlib
+-
+csignal
+-
+sys/file.h
+-
 
 /home/ubuntu/legged_bot/leggedlib/src/action.cpp
 action.h
