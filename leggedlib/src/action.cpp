@@ -101,3 +101,47 @@ vector<vector<double>> action::forward(double *t1, double *t2,double *t3,double 
                                     forward_walking(&state3,&x3,&y3,&z3,t3,3),forward_walking(&state4,&x4,&y4,&z4,t4,4)};
     return point;
 }
+
+void action::groundslopePID_pre_setting()
+{
+    pre_P_x = 0;
+    pre_P_y = 0;
+
+    error_x = 0;
+    error_y = 0;
+
+    pre_error_x = 0;
+    pre_error_y = 0;
+}
+vector<double> action::groundslopePID(vector<double> goal, double angle_x, double angle_y)
+{
+    error_x = -(goal[0] - angle_x); //minus is because of sensors hardware
+    error_y = -(goal[1] - angle_y);
+    double Kpx = 0.01;
+    double Kpy = 0.01;
+    double Kdx = 0.01;
+    double Kdy = 0.01;
+    double P_x = pre_P_x + Kpx * error_x;
+    double P_y = pre_P_y + Kpy * error_y;
+    double D_x = Kdx * (error_x - pre_error_x);
+    double D_y = Kdy * (error_y - pre_error_y);
+    //printf("%lf %lf\n", abs(Kpx * error_x), abs(Kpx * error_y));
+    if(abs(Kpx * error_x) > 0.2 || abs(Kpx * error_y) > 0.2)
+    {
+      printf("to fast acceration\n");
+      vector<double> PID = {0, 0, 1};
+      return PID;
+    }
+
+    pre_error_x = error_x;
+    pre_error_y = error_y;
+    pre_P_x = P_x;
+    pre_P_y = P_y;
+    double PID_Px = 2*P_x;
+    double PID_Py = 2*P_y;
+    double PID_Dx = 10*D_x;
+    double PID_Dy = 10*D_y;
+    vector<double> PID = {PID_Px+PID_Dx,PID_Py+PID_Dy, 0};
+    printf("%lf %lf %lf\n", PID_Px, PID_Dx, PID_Px+PID_Dx);
+    return PID;
+}

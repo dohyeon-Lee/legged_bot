@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
   action act;
 
   int data = 0;
-  double l = 0.15;
+  double l = 0.19;
   vector<vector<double>> point;
   legged_bot.setting(portHandler, packetHandler, groupSyncWrite);
   int sleep_time = 10000;
@@ -93,12 +93,9 @@ int main(int argc, char *argv[])
   double angle_y;
 
   //PID control
-  double pre_P_x = 0;
-  double pre_P_y = 0;
-
-  double error_x = 0;
-  double error_y = 0;
-
+  double PID_x;
+  double PID_y;
+  act.groundslopePID_pre_setting();
   while(1)
   {
     //about serial
@@ -107,21 +104,12 @@ int main(int argc, char *argv[])
     {
       angle_x = anglex;
       angle_y = angley;
-      //printf("%lf %lf\n", anglex, angley);
     }
     vector<double> goal = {0,0};
-    
-    error_x = -(goal[0] - angle_x); //minus is because of sensors hardware
-    error_y = -(goal[1] - angle_y);
-    double Kpx = 0.01;
-    double Kpy = 0.01;
-    double P_x = pre_P_x + Kpx * error_x;
-    double P_y = pre_P_y + Kpy * error_y;
-
-    pre_P_x = P_x;
-    pre_P_y = P_y;
-
-    vector<double> angle = body.aaa(P_x, P_y);
+    vector<double> PID = act.groundslopePID(goal, angle_x, angle_y);
+    if(PID[2] > 0.5)
+      return 0;
+    vector<double> angle = body.aaa(PID[0], PID[1]);
     point = body.groundslope(angle,l);
     legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
     usleep(sleep_time);
