@@ -92,9 +92,9 @@ int main(int argc, char *argv[])
   while(1)
   {
     //about serial
-    //serial.readangles(serial_port, &anglex, &angley);
-    //if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
-    // printf("%lf %lf\n", anglex, angley);
+    serial.readangles(serial_port, &anglex, &angley);
+    if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
+     printf("%lf %lf\n", anglex, angley);
 
     //about walking
     /*t1 = t1 + 0.00003;
