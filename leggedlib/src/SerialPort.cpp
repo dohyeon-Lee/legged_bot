@@ -49,24 +49,50 @@ Serial::Serial(int *serial_port, char port[], int baudrate)
     }
 }
 
-int Serial::readserial(int serial_port)
+int Serial::readangles(int serial_port, double *anglex, double *angley)
 {
-    string str;
+    string strx;
+    string stry;
     char chr;
     int num_bytes;
-    int message;
     int state = 0;
+    double angle_x;
+    double angle_y;
+
+    int x;
+    int y;
     while(1)
     {
-      num_bytes = read(serial_port, &chr, 1);
-      if(chr == '\n')
-        break;
-      else
-        str.push_back(chr);
+        num_bytes = read(serial_port, &chr, 1);
+        if(chr == ',')
+        {
+            state = 2;
+        }
+        else if(chr == '\n')
+        {
+            state = 0;
+            break;
+        }
+        if(state == 0)
+            strx.push_back(chr);
+        else if(state == 1)
+            stry.push_back(chr);
+        else if(state == 2)
+            state = 1;
     }
-    if(sscanf(str.c_str(), "%d", &message) != 1);
-    str = "";
-    return message;
+    if(sscanf(strx.c_str(), "%lf", &angle_x) != 1);
+    if(sscanf(stry.c_str(), "%lf", &angle_y) != 1);
+
+    //if(sscanf(strx.c_str(), "%d", &x) != 1);
+    //if(sscanf(stry.c_str(), "%d", &y) != 1);
+    strx = "";
+    stry = "";
+    *anglex = (angle_x);
+    *angley = (angle_y);
+
+    //*anglex = (double)((double)x/10000.0);
+    //*angley = (double)((double)y/10000.0);
+    return 0;
 }
 
 /*

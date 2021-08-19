@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
   double l = 0.15;
   vector<vector<double>> point;
   legged_bot.setting(portHandler, packetHandler, groupSyncWrite);
-  int sleep_time = 5000;
+  int sleep_time = 10000;
   double t1 = 0;
   double t2 = 0;
   double t3 = 0;
@@ -84,13 +84,14 @@ int main(int argc, char *argv[])
     legged_bot.rest(portHandler, packetHandler, groupSyncWrite);
     return 0; 
   }
-  int message;
+  double anglex;
+  double angley;
   while(1)
   {
     //about serial
-    message = serial.readserial(serial_port);
-    if(message != -1)
-      printf("%d\n", message);
+    serial.readangles(serial_port, &anglex, &angley);
+    if(anglex != -1 && angley != -1 && anglex != INFINITY && angley != INFINITY)
+      printf("%lf %lf\n", anglex, angley);
 
     //about dynamixel
     t1 = t1 + 0.00003;
@@ -101,26 +102,9 @@ int main(int argc, char *argv[])
     legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
     usleep(sleep_time);
   }
-  
-  
-  /*while (true) 
-  {
-    char chr;
-    int num_bytes;
-    do {
-        num_bytes = read(serial_port, &chr, 1);
-        if (num_bytes < 0) {
-            printf("Error reading: %s", strerror(errno));
-            break;
-        }
-        if (num_bytes == 1) {
-            printf("%c", chr);
-
-        }
-    }
-    while (num_bytes);
-    nanosleep((const struct timespec[]){{0, 10000000L}}, NULL);
-  }
-*/
   return 0;
 }
+
+/*point = body.plane(normal,l);
+      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+*/
