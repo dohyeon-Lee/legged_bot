@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
   portHandler->setBaudRate(BAUDRATE);
 
   group_motor_control legged_bot;
-  vector<double> normal = {0,0,1};
+  vector<double> normal = {0,0.2,1}; //for plane & groundslope
   IK body; 
   action act;
 
@@ -74,10 +74,13 @@ int main(int argc, char *argv[])
   vector<vector<double>> point;
   legged_bot.setting(portHandler, packetHandler, groupSyncWrite);
   int sleep_time = 10000;
-  double t1 = 0;
+  
+  //parameters for walking
+  /*double t1 = 0;
   double t2 = 0;
   double t3 = 0;
   double t4 = 0;
+  */
 
   if (getch() == ESC_ASCII_VALUE)
   {
@@ -93,12 +96,15 @@ int main(int argc, char *argv[])
     if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
       printf("%lf %lf\n", anglex, angley);
 
-    //about dynamixel
-    t1 = t1 + 0.00003;
+    //about walking
+    /*t1 = t1 + 0.00003;
     t2 = t2 + 0.00003;
     t3 = t3 + 0.00003;
     t4 = t4 + 0.00003;
     point = act.forward(&t1, &t2, &t3, &t4);
+    legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);*/
+
+    point = body.groundslope(normal,l);
     legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
     usleep(sleep_time);
   }
