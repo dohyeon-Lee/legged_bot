@@ -89,21 +89,39 @@ int main(int argc, char *argv[])
   }
   double anglex;
   double angley;
+  double angle_x;
+  double angle_y;
+
+  //PID control
+  double pre_P_x = 0;
+  double pre_P_y = 0;
+
+  double error_x = 0;
+  double error_y = 0;
+
   while(1)
   {
     //about serial
     serial.readangles(serial_port, &anglex, &angley);
     if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
-     printf("%lf %lf\n", anglex, angley);
+    {
+      angle_x = anglex;
+      angle_y = angley;
+      //printf("%lf %lf\n", anglex, angley);
+    }
+    vector<double> goal = {0,0};
+    
+    error_x = -(goal[0] - angle_x); //minus is because of sensors hardware
+    error_y = -(goal[1] - angle_y);
+    double Kpx = 0.01;
+    double Kpy = 0.01;
+    double P_x = pre_P_x + Kpx * error_x;
+    double P_y = pre_P_y + Kpy * error_y;
 
-    //about walking
-    /*t1 = t1 + 0.00003;
-    t2 = t2 + 0.00003;
-    t3 = t3 + 0.00003;
-    t4 = t4 + 0.00003;
-    point = act.forward(&t1, &t2, &t3, &t4);
-    legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);*/
-    vector<double> angle = body.aaa(10,10);
+    pre_P_x = P_x;
+    pre_P_y = P_y;
+
+    vector<double> angle = body.aaa(P_x, P_y);
     point = body.groundslope(angle,l);
     legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
     usleep(sleep_time);

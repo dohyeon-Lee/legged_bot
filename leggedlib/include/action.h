@@ -28,5 +28,6 @@ class action
         action();
         vector<double> forward_walking(int *state, double *x, double *y, double *z, double *t, int num);
         vector<vector<double>> forward(double *t1, double *t2,double *t3,double *t4);
+        
 };
 #endif
