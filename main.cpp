@@ -40,6 +40,7 @@ int main()
   IK body; 
   action act;
 
+
   int data = 0;
   double l = 0.15;
   vector<vector<double>> point;
