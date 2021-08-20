@@ -75,12 +75,16 @@ int main(int argc, char *argv[])
   legged_bot.setting(portHandler, packetHandler, groupSyncWrite);
   int sleep_time = 10000;
 
+  printf("choose mode\n esc: motor_rest 1: groundslope_mode 2:walking_mode \n");
   if (getch() == ESC_ASCII_VALUE)
   {
     legged_bot.rest(portHandler, packetHandler, groupSyncWrite);
     return 0; 
   }
-  else if (getch() == 49) //groundslope
+
+
+
+  else if (getch() == 49) //groundslope mode
   {
      //groundslope
     double anglex;
@@ -111,10 +115,32 @@ int main(int argc, char *argv[])
       usleep(sleep_time);
     }
   }
-  else if (getch() == 50)
+
+  
+  
+  else if (getch() == 50) //walking mode
   {
+    double t1 = 0;
+    double t2 = 0;
+    double t3 = 0;
+    double t4 = 0;
+
+    while(1)
+    {
+      //if (getch() == 119 || getch() == 87)
+      t1 = t1 + 0.00003;
+      t2 = t2 + 0.00003;
+      t3 = t3 + 0.00003;
+      t4 = t4 + 0.00003;
+      point = act.forward(&t1, &t2, &t3, &t4);
+      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+      usleep(sleep_time);
+    }
 
   }
+
+
+  
   else if (getch() == 51)
   {
 
