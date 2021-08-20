@@ -80,33 +80,45 @@ int main(int argc, char *argv[])
     legged_bot.rest(portHandler, packetHandler, groupSyncWrite);
     return 0; 
   }
-  
-  double anglex;
-  double angley;
-  double angle_x;
-  double angle_y;
-
-  //PID control
-  double PID_x;
-  double PID_y;
-  act.groundslopePID_pre_setting();
-  while(1)
+  else if (getch() == 49) //groundslope
   {
-    //about serial
-    serial.readangles(serial_port, &anglex, &angley);
-    if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
+     //groundslope
+    double anglex;
+    double angley;
+    double angle_x;
+    double angle_y;
+
+    //PID control
+    double PID_x;
+    double PID_y;
+    act.groundslopePID_pre_setting();
+    while(1)
     {
-      angle_x = anglex;
-      angle_y = angley;
+      //about serial
+      serial.readangles(serial_port, &anglex, &angley);
+      if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
+      {
+        angle_x = anglex;
+        angle_y = angley;
+      }
+      vector<double> goal = {0,0};
+      vector<double> PID = act.groundslopePID(goal, angle_x, angle_y);
+      if(PID[2] > 0.5)
+        return 0;
+      vector<double> angle = body.aaa(PID[0], PID[1]);
+      point = body.groundslope(angle,l);
+      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+      usleep(sleep_time);
     }
-    vector<double> goal = {0,0};
-    vector<double> PID = act.groundslopePID(goal, angle_x, angle_y);
-    if(PID[2] > 0.5)
-      return 0;
-    vector<double> angle = body.aaa(PID[0], PID[1]);
-    point = body.groundslope(angle,l);
-    legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-    usleep(sleep_time);
   }
+  else if (getch() == 50)
+  {
+
+  }
+  else if (getch() == 51)
+  {
+
+  }
+ 
   return 0;
 }
