@@ -74,19 +74,13 @@ int main(int argc, char *argv[])
   vector<vector<double>> point;
   legged_bot.setting(portHandler, packetHandler, groupSyncWrite);
   int sleep_time = 10000;
-  
-  //parameters for walking
-  /*double t1 = 0;
-  double t2 = 0;
-  double t3 = 0;
-  double t4 = 0;
-  */
 
   if (getch() == ESC_ASCII_VALUE)
   {
     legged_bot.rest(portHandler, packetHandler, groupSyncWrite);
     return 0; 
   }
+  
   double anglex;
   double angley;
   double angle_x;
@@ -116,7 +110,3 @@ int main(int argc, char *argv[])
   }
   return 0;
 }
-
-/*point = body.plane(normal,l);
-      legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
-*/
