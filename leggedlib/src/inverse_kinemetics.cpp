@@ -14,9 +14,9 @@ vector<double> IK::IK_LF(double Yy, double Zz, double Xx)
     double L2 = 0.095;
 
     //about body length
-    double LFx = 0.095; //190/2 * 0.001
+    double LFx = 0.075; //190/2 * 0.001
     double LFy = 0.059;//118/2 * 0.001
-    double RFx = 0.095; //190/2 * 0.001
+    double RFx = 0.075; //190/2 * 0.001
     double RFy = -0.059;//-118/2 * 0.001
     double LBx = -0.095;//-190/2 * 0.001
     double LBy = 0.059;//118/2 * 0.001
@@ -51,9 +51,9 @@ vector<double> IK::IK_RF(double Yy, double Zz, double Xx)
     double L2 = 0.095;
 
     //about body length
-    double LFx = 0.095; //190/2 * 0.001
+    double LFx = 0.075; //190/2 * 0.001
     double LFy = 0.059;//118/2 * 0.001
-    double RFx = 0.095; //190/2 * 0.001
+    double RFx = 0.075; //190/2 * 0.001
     double RFy = -0.059;//-118/2 * 0.001
     double LBx = -0.095;//-190/2 * 0.001
     double LBy = 0.059;//118/2 * 0.001
@@ -89,9 +89,9 @@ vector<double> IK::IK_LB(double Yy, double Zz, double Xx)
     double L2 = 0.095;
 
     //about body length
-    double LFx = 0.095; //190/2 * 0.001
+    double LFx = 0.075; //190/2 * 0.001
     double LFy = 0.059;//118/2 * 0.001
-    double RFx = 0.095; //190/2 * 0.001
+    double RFx = 0.075; //190/2 * 0.001
     double RFy = -0.059;//-118/2 * 0.001
     double LBx = -0.095;//-190/2 * 0.001
     double LBy = 0.059;//118/2 * 0.001
@@ -127,9 +127,9 @@ vector<double> IK::IK_RB(double Yy, double Zz, double Xx)
     double L2 = 0.095;
 
     //about body length
-    double LFx = 0.095; //190/2 * 0.001
+    double LFx = 0.075; //190/2 * 0.001
     double LFy = 0.059;//118/2 * 0.001
-    double RFx = 0.095; //190/2 * 0.001
+    double RFx = 0.075; //190/2 * 0.001
     double RFy = -0.059;//-118/2 * 0.001
     double LBx = -0.095;//-190/2 * 0.001
     double LBy = 0.059;//118/2 * 0.001
@@ -190,16 +190,17 @@ vector<double> IK::multiply(vector<double> v1, double v2)
 
 vector<vector<double>> IK::plane(vector<double> normal, double l)
 {
+
     //about body length
-    double LFx = 0.095; //190/2 * 0.001
+    double LFx = 0.075; //190/2 * 0.001
     double LFy = 0.059;//118/2 * 0.001
-    double RFx = 0.095; //190/2 * 0.001
+    double RFx = 0.075; //190/2 * 0.001
     double RFy = -0.059;//-118/2 * 0.001
     double LBx = -0.095;//-190/2 * 0.001
     double LBy = 0.059;//118/2 * 0.001
     double RBx = -0.095;//-190/2 * 0.001
-    double RBy = -0.059;//-118/2 * 0.001
-    
+    double RBy = -0.059;//-118/2 * 0.001    
+
     vector<double> LF0 = {LFx, LFy, 0};
     vector<double> RF0 = {RFx, RFy, 0};
     vector<double> LB0 = {LBx, LBy, 0};
@@ -228,9 +229,9 @@ vector<vector<double>> IK::plane(vector<double> normal, double l)
 vector<vector<double>> IK::groundslope(vector<double> normal, double l)
 {
     //about body length
-    double LFx = 0.095; //190/2 * 0.001
+    double LFx = 0.075; //190/2 * 0.001
     double LFy = 0.059;//118/2 * 0.001
-    double RFx = 0.095; //190/2 * 0.001
+    double RFx = 0.075; //190/2 * 0.001
     double RFy = -0.059;//-118/2 * 0.001
     double LBx = -0.095;//-190/2 * 0.001
     double LBy = 0.059;//118/2 * 0.001

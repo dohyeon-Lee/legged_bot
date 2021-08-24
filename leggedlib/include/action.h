@@ -37,6 +37,7 @@ class action
         double pre_error_y;
         action();
         vector<double> forward_walking(int *state, double *x, double *y, double *z, double *t, int num);
+        vector<double> forward_walking_v2(int *state, double *x, double *y, double *z, double *t, int num);
         vector<vector<double>> forward(double *t1, double *t2,double *t3,double *t4);
         void groundslopePID_pre_setting();
         vector<double> groundslopePID(vector<double> goal, double angle_x, double angle_y);
