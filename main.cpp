@@ -117,21 +117,40 @@ int main(int argc, char *argv[])
   
   else if (getch() == 50) //walking mode
   {
-    double leg_term = ((act.point1[0]-act.point2[0])/2.5);
+     //groundslope
+    double anglex;
+    double angley;
+    double angle_x;
+    double angle_y;
+
+    //PID control
+    double PID_x;
+    double PID_y;
+    act.groundslopePID_pre_setting();
+
+    double leg_term = ((act.point1[0]-act.point2[0])/3)*2;//((act.point1[0]-act.point2[0])/2.5); 
     double t_term = 0.0015;
-    double t1 = 0 + leg_term;
-    double t2 = ((act.point1[0]-act.point2[0])/3)*2 + leg_term;
-    double t3 = 0;
-    double t4 = ((act.point1[0]-act.point2[0])/3)*2;
+    double t1 = 0 + leg_term                                      +(0.075/5)*2;
+    double t2 = ((act.point1[0]-act.point2[0])/3)*2 + leg_term    +(0.075/5)*2;
+    double t3 = 0                                                 +(0.075/5)*2;
+    double t4 = ((act.point1[0]-act.point2[0])/3)*2               +(0.075/5)*2;
 
     while(1)
     {
-      //if (getch() == 119 || getch() == 87)
-      t1 = t1 + t_term;
-      t2 = t2 + t_term;
-      t3 = t3 + t_term;
-      t4 = t4 + t_term;
-      point = act.forward(&t1, &t2, &t3, &t4);
+      serial.readangles(serial_port, &anglex, &angley);
+      if(anglex != -1 && angley != -1 && anglex <= 180 && anglex >= -180 && angley <= 180 && angley >= -180)
+      {
+        angle_x = anglex;
+        angle_y = angley;
+      }
+      vector<double> goal = {0,0};
+      vector<double> PID = act.walkingPID(goal, angle_y, angle_x);
+      //printf("%lf \n", angle_x);
+      //t1 = t1 + t_term;
+      //t2 = t2 + t_term;
+      //t3 = t3 + t_term;
+      //t4 = t4 + t_term;
+      point = act.forward(PID, &t1, &t2, &t3, &t4);
       legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
       usleep(sleep_time);
     }
