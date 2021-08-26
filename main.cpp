@@ -75,14 +75,12 @@ int main(int argc, char *argv[])
   legged_bot.setting(portHandler, packetHandler, groupSyncWrite);
   int sleep_time = 10000;
 
-  printf("choose mode\n esc: motor_rest 1: groundslope_mode 2:walking_mode \n");
+  printf("choose mode\n esc: motor_rest 1: groundslope_mode 2:walking_mode 3:shacking mode\n");
   if (getch() == ESC_ASCII_VALUE)
   {
     legged_bot.rest(portHandler, packetHandler, groupSyncWrite);
     return 0; 
   }
-
-
 
   else if (getch() == 49) //groundslope mode
   {
@@ -117,21 +115,22 @@ int main(int argc, char *argv[])
   }
 
   
-  
   else if (getch() == 50) //walking mode
   {
-    double t1 = 0;
-    double t2 = 0;
+    double leg_term = ((act.point1[0]-act.point2[0])/2.5);
+    double t_term = 0.0015;
+    double t1 = 0 + leg_term;
+    double t2 = ((act.point1[0]-act.point2[0])/3)*2 + leg_term;
     double t3 = 0;
-    double t4 = 0;
+    double t4 = ((act.point1[0]-act.point2[0])/3)*2;
 
     while(1)
     {
       //if (getch() == 119 || getch() == 87)
-      t1 = t1 + 0.00003;
-      t2 = t2 + 0.00003;
-      t3 = t3 + 0.00003;
-      t4 = t4 + 0.00003;
+      t1 = t1 + t_term;
+      t2 = t2 + t_term;
+      t3 = t3 + t_term;
+      t4 = t4 + t_term;
       point = act.forward(&t1, &t2, &t3, &t4);
       legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
       usleep(sleep_time);
@@ -143,6 +142,84 @@ int main(int argc, char *argv[])
   
   else if (getch() == 51)
   {
+    l = 0.15;
+    sleep_time = 100;
+    while(1)
+    {   
+      for(double i = 0; i <= 0.2; i = i+0.001)
+      {
+        normal[0] = 0.2;
+        normal[1] = i;
+
+        point = body.plane(normal,l);
+        legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+        usleep(sleep_time);
+      }
+      for(double i = 0; i <= 0.2; i = i+0.001)
+      {
+        normal[0] = 0.2-i;
+        normal[1] = 0.2;
+
+        point = body.plane(normal,l);
+        legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+        usleep(sleep_time);
+      }
+      for(double i = 0; i <= 0.2; i = i+0.001)
+      {
+        normal[0] = -i;
+        normal[1] = 0.2;
+
+        point = body.plane(normal,l);
+        legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+        usleep(sleep_time);
+      }
+      for(double i = 0; i <= 0.2; i = i+0.001)
+      {
+        normal[0] = -0.2;
+        normal[1] = 0.2-i;
+
+        point = body.plane(normal,l);
+        legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+        usleep(sleep_time);
+      }
+      for(double i = 0; i <= 0.2; i = i+0.001)
+      {
+        normal[0] = -0.2;
+        normal[1] = -i;
+
+        point = body.plane(normal,l);
+        legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+        usleep(sleep_time);
+      }
+      for(double i = 0; i <= 0.2; i = i+0.001)
+      {
+        normal[0] = -0.2+i;
+        normal[1] = -0.2;
+
+        point = body.plane(normal,l);
+        legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+        usleep(sleep_time);
+      }
+      for(double i = 0; i <= 0.2; i = i+0.001)
+      {
+        normal[0] = i;
+        normal[1] = -0.2;
+
+        point = body.plane(normal,l);
+        legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+        usleep(sleep_time);
+      }
+      for(double i = 0; i <= 0.2; i = i+0.001)
+      {
+        normal[0] = 0.2;
+        normal[1] = -0.2+i;
+
+        point = body.plane(normal,l);
+        legged_bot.moving(portHandler, packetHandler, groupSyncWrite, point);
+        usleep(sleep_time);
+      }
+
+    }
 
   }
  

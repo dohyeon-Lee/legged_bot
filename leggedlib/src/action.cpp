@@ -8,16 +8,19 @@ action::action()
     state3 = 1;
     state4 = 1;
 
-    x1 = -0.025;
+    point1 = {0.05,0,0};
+    point2 = {-0.025,0,0};
+
+    x1 = 0;
     y1 = 0;
     z1 = 0;
-    x2 = 0.05;
+    x2 = 0;
     y2 = 0;
     z2 = 0;
-    x3 = -0.025;
+    x3 = 0;
     y3 = 0;
     z3 = 0;
-    x4 = 0.05;
+    x4 = 0;
     y4 = 0;
     z4 = 0;
 }
@@ -26,8 +29,8 @@ vector<double> action::forward_walking(int *state, double *x, double *y, double 
     double lengthy = 0.118;
     double lengthx = 0.190;
     double height = 0.15;
-     vector<double> point1 = {0.06,0,0};
-    vector<double> point2 = {-0.025,0,0};
+    //vector<double> point1 = {0.06,0,0};
+    //vector<double> point2 = {-0.025,0,0};
     vector<double> point3 = {-0.035,0,0.01};
 
     
@@ -99,71 +102,68 @@ vector<double> action::forward_walking_v2(int *state, double *x, double *y, doub
 {
     double lengthy = 0.118;
     double lengthx = 0.190;
-    double height = 0.16;
-    vector<double> point1 = {0.05,0,0};
-    vector<double> point2 = {-0.025,0,0};
+    double height = 0.18;
     double r = (point1[0] - point2[0])/2;
+    double trans = 180/((point1[0] - point2[0])/3);
+
+    double yterm = 0.015;
     *y = sqrt(pow(r,2)-pow(*x-(point1[0] - r),2));
-    
-    if(*state == 1)
+    *state = (point1[0]-point2[0]);
+    if(*t <= (point1[0]-point2[0]))
     {
-        *x = *x + 1*(*t);
+        *x = point2[0] + 1*(*t);
         *y = 0;
         *z = 0;
-        if(*x >= point1[0] && z >= 0)
-        {
-            *x = point1[0];
-            *state = 2;
-            *t = 0;
-        }
+        usleep(10);
     }
-    else if(*state == 2)
-    {
-        double trans = 100000;
+    else if(*t > (point1[0]-point2[0]) && *t <= (point1[0]-point2[0]) + M_PI/(trans*(M_PI/180)))
+    {     
         //printf("%lf \n", *t*1000);
         //*x = *x - 1*(*t);
-        *x = (point1[0] - r) + r*cos((*t * trans)*(M_PI/180));
+        *x = (point1[0] - r) + r*cos(((*t - (point1[0]-point2[0])) * trans)*(M_PI/180));
         *y = 0;
         //*z = sqrt(pow(r,2)-pow(*x-(point1[0] - r),2));
-        *z = (r/3)*sin((*t * trans)*(M_PI/180));
-        if(*t*trans >= 180)
-        {
-            *state = 1;
-            *t = 0;
-            *z = 0;
-        }
+        *z = (r)*sin(((*t - (point1[0]-point2[0])) * trans)*(M_PI/180));
+        usleep(10);
+    }
+    else if(*t > (point1[0]-point2[0]) + M_PI/(trans*(M_PI/180)))
+    {
+        *t = 0;
     }
 
     vector<double> point;
     if(num == 1)
     {
-        point.push_back(*x+lengthx/2);
-        point.push_back(*y-lengthy/2);
+        point.push_back(*x+lengthx/2-0.02);
+        point.push_back(*y-lengthy/2+yterm);
         point.push_back(*z-height);
     }
     else if(num == 2)
     {
-        point.push_back(*x+lengthx/2);
-        point.push_back(*y+lengthy/2);
+        point.push_back(*x+lengthx/2-0.02);
+        point.push_back(*y+lengthy/2-yterm);
         point.push_back(*z-height);
     }
     else if(num == 3)
     {
-        point.push_back(*x-lengthx/2);
-        point.push_back(*y+lengthy/2);
+        point.push_back(*x-(lengthx/2+0.04));
+        point.push_back(*y+lengthy/2-yterm);
         point.push_back(*z-height);
     }
     else if(num == 4)
     {
-        point.push_back(*x-lengthx/2);
-        point.push_back(*y-lengthy/2);
+        point.push_back(*x-(lengthx/2+0.04));
+        point.push_back(*y-lengthy/2+yterm);
         point.push_back(*z-height);
     }
     
     return point;
 
 }
-
+vector<double> action::walkingPID(vector<double> goal, double angle_x, double angle_y)
+{
+    
+}
 vector<vector<double>> action::forward(double *t1, double *t2,double *t3,double *t4)
 {
     vector<vector<double>> point = {forward_walking_v2(&state1,&x1,&y1,&z1,t1,1),forward_walking_v2(&state2,&x2,&y2,&z2,t2,2),
